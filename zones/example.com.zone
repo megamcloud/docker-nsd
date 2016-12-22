@@ -1,0 +1,20 @@
+; NSD authoritative DNS example zone
+
+$ORIGIN example.com. ; default zone domain
+$TTL 86400           ; default time to live
+
+@ IN SOA ns1.example.com. admin.example.com. (
+           2016122400  ; serial number
+           28800       ; Refresh
+           7200        ; Retry
+           864000      ; Expire
+           86400       ; Min TTL
+           )
+
+           NS      ns1.example.com.
+           MX      10 mail.example.com.
+
+test       IN     A    10.0.0.1
+hello      IN     TXT  "Hello, World!"
+localhost  IN     A    127.0.0.1
+*          IN     A    10.0.0.254
