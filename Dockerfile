@@ -8,4 +8,4 @@ COPY nsd.conf /etc/nsd/nsd.conf
 COPY nsd-reload /usr/bin
 RUN chmod 755 /usr/bin/nsd-reload
 EXPOSE 53/udp 53/tcp
-CMD ["/usr/sbin/nsd", "-d", "-u", "nsd"]
+CMD ["/usr/sbin/nsd", "-d"]
