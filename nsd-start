@@ -1,0 +1,3 @@
+#!/bin/bash -eu
+nsd-genzoneconf > "$NSD_CONFDIR/zones.conf"
+exec /usr/sbin/nsd -d

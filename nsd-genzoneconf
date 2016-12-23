@@ -1,0 +1,25 @@
+#!/bin/bash
+
+log_msg()
+{
+    echo "$PROGNAME: $*" >&2
+}
+
+gen_zone()
+{
+    cat <<EOS
+zone:
+  name: "$1"
+  include-pattern: "zone"
+EOS
+}
+
+shopt -s nullglob
+PROGNAME="$(basename $0)"
+log_msg "generating zones configurations"
+for file in "$NSD_CONFDIR"/zones/*.zone; do
+    ZONE_NAME="$(basename ${file%.zone})"
+    log_msg "=> ${ZONE_NAME}"
+    gen_zone "${ZONE_NAME}"
+done
+log_msg "finished"
