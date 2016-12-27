@@ -1,10 +1,10 @@
 FROM ubuntu:latest
 MAINTAINER Nicolas Limage <github@xephon.org>
-RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
-VOLUME /etc/nsd/zones
-RUN DEBIAN_FRONTEND=noninteractive apt-get -y install nsd
 ENV NSD_CONFDIR /etc/nsd
 ENV NSD_RUNDIR /run/nsd
+ENV NSD_ZONESDIR $NSD_CONFDIR/zones
+VOLUME $NSD_ZONESDIR
+RUN apt-get -qq update && DEBIAN_FRONTEND=noninteractive apt-get -y install nsd
 RUN mkdir $NSD_RUNDIR && chown nsd:nsd $NSD_RUNDIR
 COPY nsd.conf $NSD_CONFDIR/nsd.conf
 COPY nsd-reload nsd-genzoneconf nsd-start /usr/local/bin/
